@@ -1,4 +1,4 @@
-FROM php:7.2.11-fpm-alpine3.7 as build
+FROM php:7.2.34-fpm-alpine3.12 as build
 
 RUN apk update \
     && apk add --no-cache libpng-dev  zeromq-dev git \
@@ -16,8 +16,8 @@ RUN composer install
 
 FROM trafex/alpine-nginx-php7:ba1dd422
 
-RUN apk update && apk add --no-cache ca-certificates busybox-suid sudo php7-redis php7-pdo php7-pdo_mysql php7-fileinfo php7-event shadow gettext bash apache2-utils logrotate
-
+RUN apk update && apk add --no-cache busybox-suid sudo php7-redis php7-pdo php7-pdo_mysql \
+    php7-fileinfo php7-event shadow gettext bash apache2-utils logrotate ca-certificates
 
 #fix DST expired cert
 
